@@ -20,12 +20,52 @@
 function initialize() {
   // Create the autocomplete object, restricting the search
   // to geographical location types.
-  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'),{ types: [] });
-  var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('autocomplete1'),{ types: [] });
+  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('source'),{ types: [] });
+  var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('destination'),{ types: [] });
   
 }
 
 function fetchmap(){
-	var src = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyBzOlFJoe2QzD2hXJlD8KO1v2dc5B7B9Vg&origin="+jQuery("#autocomplete").val().replace(/[ ]/g, "+")+"&destination="+jQuery("#autocomplete1").val().replace(/[ ]/g, "+")+"&avoid=tolls|highways"
+	// var src = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyBzOlFJoe2QzD2hXJlD8KO1v2dc5B7B9Vg&origin="+jQuery("#autocomplete").val().replace(/[ ]/g, "+")+"&destination="+jQuery("#autocomplete1").val().replace(/[ ]/g, "+")+"&avoid=tolls|highways"
 	//jQuery("#mapurl").attr("src",src);
+}
+function validateForm(){
+	var message = ""
+	if (jQuery('#source').val().length == 0){
+		message = "Ah we need a cooler <strong>source</strong> ;) "
+	}
+	if (jQuery('#destination').val().length == 0){
+		if (message.length != 0){
+			message += " annndddd give me an good <strong>destination </strong> as well :D  !!"
+		}
+		else{
+			message = "OK ! Now give me an awesome <strong>destination </strong>:D "
+		}
+	}
+	if (message.length != 0){
+		jQuery("#validation_error").attr("hidden",false);
+		jQuery("#validation_error").append(message);
+		return false;
+	}
+	return true;
+}
+
+function getRate(){
+	if(validateForm()){
+		jQuery.ajax({
+                	type : 'GET',
+                	data:{
+                    	origin: jQuery('#source').val(),
+                    	destination: jQuery('#destination').val()
+                	},
+                	url: "/get_rates",
+                	success: function(data) {
+                  	alert(data.rate);
+                	},
+                	error: function(error){
+                  	alert(error.responseText);
+                	}
+            	});
+	}
+
 }

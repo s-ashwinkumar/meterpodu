@@ -1,12 +1,10 @@
 module GoogleApi
-  class Direction
+  class Direction < Base
 
-  	include RosettaStone::YamlSettings
-    yaml_settings(:config_file => 'sgoogleapi.yml', :hash_reader => false)
-    
-    class << self
-    	def get_distance
-    	end	
-    end	
+    def distance
+  	  	response = self.class.get("/maps/api/directions/json?", @options)
+  	  	GoogleResponseParser.get_distance(response.parsed_response) 
+  	end
+
   end
 end  	
