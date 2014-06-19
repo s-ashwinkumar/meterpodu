@@ -26,8 +26,8 @@ function initialize() {
 }
 
 function fetchmap(){
-	// var src = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyBzOlFJoe2QzD2hXJlD8KO1v2dc5B7B9Vg&origin="+jQuery("#autocomplete").val().replace(/[ ]/g, "+")+"&destination="+jQuery("#autocomplete1").val().replace(/[ ]/g, "+")+"&avoid=tolls|highways"
-	//jQuery("#mapurl").attr("src",src);
+	var src = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyBzOlFJoe2QzD2hXJlD8KO1v2dc5B7B9Vg&origin="+jQuery("#source").val().replace(/[ ]/g, "+")+"&destination="+jQuery("#destination").val().replace(/[ ]/g, "+")+"&avoid=tolls|highways"
+	jQuery("#mapurl").attr("src",src);
 }
 function validateForm(){
 	var message = ""
@@ -43,27 +43,43 @@ function validateForm(){
 		}
 	}
 	if (message.length != 0){
-		jQuery("#validation_error").attr("hidden",false);
-		jQuery("#validation_error").append(message);
+		$('.alert').fadeIn();
+		jQuery("#error_message").html(message);
 		return false;
 	}
 	return true;
 }
+function clearError(){
+	$('.alert').fadeOut();
+	jQuery("#error_message").html("");
+}
+
+function resetFields(){
+	clearError();
+	jQuery(".well").fadeOut();
+	jQuery('#source').val('');
+	jQuery('#destination').val('');
+}
 
 function getRate(){
+	// fetchmap();
 	if(validateForm()){
+		jQuery(".well").fadeOut();
+		var from = jQuery('#source').val();
+		var to = jQuery('#destination').val();
 		jQuery.ajax({
                 	type : 'GET',
                 	data:{
-                    	origin: jQuery('#source').val(),
-                    	destination: jQuery('#destination').val()
+                    	origin: from,
+                    	destination: to
                 	},
                 	url: "/get_rates",
                 	success: function(data) {
-                  	alert(data.rate);
+                  		jQuery(".well").html("<strong>'"+from +"'</strong> to <strong>'"+ to + "'</strong> might cost you around <strong>Rs "+ data.rate+"</strong>" );
+                  		jQuery(".well").fadeIn();
                 	},
                 	error: function(error){
-                  	alert(error.responseText);
+                  		alert(error.responseText);
                 	}
             	});
 	}

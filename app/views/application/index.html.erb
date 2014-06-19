@@ -6,21 +6,23 @@
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBzOlFJoe2QzD2hXJlD8KO1v2dc5B7B9Vg&origin=Mylapore,+Chennai,+Tamil Nadu,+India&destination=Perungudi,+Chennai,+Tamil+Nadu, India&avoid=tolls|highways">
 </iframe> -->
-<div class="alert alert-danger alert-dismissable" id="validation_error" hidden="true">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <!-- <strong>Warning!</strong> Best check yo self, you're not looking too good. -->
+<div class="alert alert-danger alert-dismissable" hidden="true">
+    <a class="close" onclick="clearError()">×</a>
+    <span id="error_message"></span>
 </div>
-
 <div align="center" class="fill">
-	<input id="source" placeholder="Enter source" type="text" class="form-control"></input>
-   	</br>
-    <input id="destination" placeholder="Enter destination" type="text" class="form-control"input>
-    </br></br>
-   	<button type="button" class="btn btn-default btn-lg" onclick="getRate()">
- 		<span class="glyphicon glyphicon-search"></span> Fetch
+	<input id="source" placeholder="Enter source" type="text" class="form-control location"></input>
+  </br>
+  <input id="destination" placeholder="Enter destination" type="text" class="form-control location "></input>
+  </br></br>
+  <button type="button" class="btn btn-default btn-lg" onclick="getRate()">
+ 	<span class="glyphicon glyphicon-search"></span> Fetch
 	</button>
-    </br></br></br></br>
-    <iframe  id="mapurl" src=""></iframe>
+  <button type="button" class="btn btn-default btn-lg" onclick="resetFields()">
+  <span class="glyphicon glyphicon-search"></span> Reset
+  </button>
+  <div class="well result" style="margin-top:50px;" hidden="true"></div>
+    <!-- <iframe  id="mapurl" src="" style="width:100%;height:100%;margin-top:50px;"></iframe> -->
 </div>
 
 

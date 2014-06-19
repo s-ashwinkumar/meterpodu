@@ -15,3 +15,9 @@
 body {
     padding-top: 100px;
 }
+.location {
+	max-width: 350px;
+}
+.result {
+	font-size: 18px;
+}
