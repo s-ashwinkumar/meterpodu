@@ -1,7 +1,7 @@
 
 module GoogleApi
   class Base
-    require 'lib/google_response_parser'
+    require_dependency 'lib/google_response_parser'
   	include HTTParty
   	base_uri 'https://maps.googleapis.com'
 
