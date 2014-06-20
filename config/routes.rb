@@ -51,7 +51,7 @@ Meterpodu::Application.routes.draw do
   root :to => 'application#index'
 
   match '/get_rates' => 'distance#get_rate'
-
+  match '/about_us' => 'application#about_us', :as => :about_us
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

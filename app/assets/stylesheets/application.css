@@ -21,3 +21,9 @@ body {
 .result {
 	font-size: 18px;
 }
+
+.main_buttons{
+  padding: 5px 10px !important;
+  font-size: 17px !important;
+  margin: 0px 15px 10px 15px !important;
+}

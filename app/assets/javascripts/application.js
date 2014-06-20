@@ -75,6 +75,7 @@ function getRate(){
                 	},
                 	url: "/get_rates",
                 	success: function(data) {
+                		
                   		jQuery(".well").html("<strong>'"+from +"'</strong> to <strong>'"+ to + "'</strong> might cost you around <strong>Rs "+ data.rate+"</strong>" );
                   		jQuery(".well").fadeIn();
                 	},
