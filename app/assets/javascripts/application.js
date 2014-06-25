@@ -20,8 +20,8 @@
 function initialize() {
   // Create the autocomplete object, restricting the search
   // to geographical location types.
-  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('source'),{ types: [] });
-  var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('destination'),{ types: [] });
+  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('source'),{ types: [], country: 'in' });
+  var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('destination'),{ types: [], country: 'in' });
   
 }
 
@@ -50,7 +50,7 @@ function validateForm(){
 	return true;
 }
 function clearError(){
-	$('.alert').fadeOut();
+	$('.alert').slideUp();
 	jQuery("#error_message").html("");
 }
 
